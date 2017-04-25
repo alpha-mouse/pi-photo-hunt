@@ -75,7 +75,8 @@ def capture():
     # Because when running this under uwsgi I've pulled my hair out
     # trying to understand why no photos are taken
     camera = PiCamera()
-    camera.resolution = (1296, 972)
+    # camera.resolution = (1296, 972)
+    camera.iso = 1600
     while not interrupt_capture:
         camera.capture(get_photo_path(photo_index))
         photo_index += 1
