@@ -38,7 +38,7 @@ def photos_count():
 def photo(index):
     if index == 'last':
         index = get_photos_max_index()
-    return static(get_photo_path(index), 'image/jpg')
+    return static(get_photo_path('%04d' % int(index)), 'image/jpg')
 
 
 def static(path, type):
@@ -78,7 +78,7 @@ def capture():
     # camera.resolution = (1296, 972)
     camera.iso = 1600
     while not interrupt_capture:
-        camera.capture(get_photo_path(photo_index))
+        camera.capture(get_photo_path('%04d' % photo_index))
         photo_index += 1
     camera.close()
 
