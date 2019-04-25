@@ -36,9 +36,15 @@ def photos_count():
 
 @get('/photos/<index>')
 def photo(index):
+    cache = None
     if index == 'last':
         index = get_photos_max_index()
-    return static(get_photo_path('%04d' % int(index)), 'image/jpg')
+        cache = 'no-store'
+    response = static(get_photo_path('%04d' % int(index)), 'image/jpg')
+    if cache is not None:
+        response.set_header('Cache-Control', cache)
+    return response
+
 
 
 def static(path, type):
