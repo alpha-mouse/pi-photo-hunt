@@ -1,0 +1,12 @@
+[Unit]
+Description=Photo Hunt
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/Documents/Work/pi-photo-hunt/main.py
+WorkingDirectory=/home/pi/Documents/Work/pi-photo-hunt
+Restart=on-abort
+ 
+[Install]
+WantedBy=multi-user.target

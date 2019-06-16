@@ -1,19 +1,7 @@
-upstream _photo_hunt {
-    server unix:/run/uwsgi/app/photo_hunt/socket;
-}
-
 server {
     listen [::]:80;
     listen 80;
-    server_name deb.ngx.cc;
-    root /var/www/photo_hunt;
-
     location / {
-        try_files $uri @uwsgi;
-    }
-
-    location @uwsgi {
-        include uwsgi_params;
-        uwsgi_pass _photo_hunt;
+        proxy_pass http://localhost:3001;
     }
 }

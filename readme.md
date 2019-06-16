@@ -1,14 +1,25 @@
-https://michael.lustfield.net/nginx/bottle-uwsgi-nginx-quickstart
+https://www.raspberrypi.org/forums/viewtopic.php?t=197513
 
-pip3 install bottle  
-apt-get install uwsgi uwsgi-plugin-python3 python3-bottle nginx
+```
+pip3 install bottle
+apt-get install python3-bottle nginx
 
-create /var/www/photo_hunt/photos and edit main.py->config['photos_directory']  
-chmod 777 /var/www/photo_hunt/photos
+mkdir ~/Documents/Work
+cd ~/Documents/Work
+git clone --depth=1 https://github.com/alpha-mouse/pi-photo-hunt.git
+cd pi-photo-hunt
+mkdir photos
+//? chmod 777 photos
+chmod +x main.py
 
-usermod -aG video www-data
+sudo ln -s $(pwd)/photo_hunt.service /etc/systemd/system
+sudo chmod 644 photo_hunt.service
+sudo systemctl daemon-reload
+sudo systemctl enable photo_hunt.service
+sudo systemctl start photo_hunt.service
+sudo systemctl status photo_hunt.service
 
-sudo ln -sf /etc/uwsgi/apps-available/photo_hunt.ini /etc/uwsgi/apps-enabled/photo_hunt.ini  
-sudo ln -sf /etc/nginx/sites-available/photo_hunt /etc/nginx/sites-enabled/default  
-sudo service uwsgi restart  
+sudo ln -sf $(pwd)/photo_hunt /etc/nginx/sites-available
+sudo ln -sf /etc/nginx/sites-available/photo_hunt /etc/nginx/sites-enabled/default
 sudo service nginx restart
+```

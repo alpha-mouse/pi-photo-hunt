@@ -6,22 +6,34 @@
 
 <body>
 <div>
-    <p>
-        <button id="start-capture">Start</button>
-        <button id="stop-capture">Stop</button>
-    </p>
-    <p>
-        Current photos count: <span id="photos-count">??</span>.
-    </p>
-    <p>
-        <a href="photos/last">Last photo</a>
-    </p>
-    <p>
-        <a id="last-photo-link" href="photos/0">Photo #<span id="last-photo-text">??</span></a>
-    </p>
+	<h1>Server <span id="server-status"></span></h1>
+	<div>
+		<h1>Capturing <span id="is-capturing"></span></h1>
+		<p>
+			<button id="start-capture">Start</button>
+			<button id="stop-capture">Stop</button>
+		</p>
+		<p>
+			Current photos count: <span id="photos-count">??</span>.
+		</p>
+		<p>
+			<a href="photos/last">Last photo</a>
+		</p>
+		<p>
+			<a id="last-photo-link" href="photos/0">Photo #<span id="last-photo-text">??</span></a>
+		</p>
+	</div>
+	<div>
+		<h1>Autopilot <span id="is-autopiloting"></span></h1>
+		<p>Latency: <span id="vision-latency"></span></p>
+		<p>
+			<button id="start-autopilot">Start</button>
+			<button id="stop-autopilot">Stop</button>
+		</p>
+	</div>
 </div>
 <script type="text/javascript"
-        src="/js/index.js"></script>
+		src="/js/index.js"></script>
 </body>
 
 </html>

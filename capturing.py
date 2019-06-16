@@ -13,14 +13,14 @@ class Capturing:
         self.interrupt_capture = False
         self.lock = Lock()
 
-    def start_capture(self):
+    def start(self):
         if self.thread is None:
             with self.lock:
                 if self.thread is None:
                     self.thread = Thread(target=self.capture)
                     self.thread.start()
 
-    def stop_capture(self):
+    def stop(self):
         if self.thread is not None:
             with self.lock:
                 if self.thread is not None:
@@ -28,6 +28,10 @@ class Capturing:
                     self.thread.join()
                     self.interrupt_capture = False
                     self.thread = None
+
+    @property
+    def is_capturing(self):
+        return self.thread is not None
 
     def get_photos_max_index(self):
         p = re.compile(self.get_photo_path('(\d+)'), re.IGNORECASE)
