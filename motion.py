@@ -38,10 +38,10 @@ class Motion:
         self._updatePwm()
         self._speedPwm.enable = True
         self._directionPwm.enable = True
-        self._enabledOutput.value = 1 if self._enabled else 0
+        self._enabledOutput.value = 1
 
     def disable(self):
-        self._enabledOutput.value = 1 if self._enabled else 0
+        self._enabledOutput.value = 0
         self._speedPwm.enable = False
         self._directionPwm.enable = False
 
