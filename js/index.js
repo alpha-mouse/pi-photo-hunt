@@ -22,6 +22,8 @@
 				document.getElementById('is-capturing').innerHTML = response.isCapturing ? 'on' : 'off';
 				document.getElementById('is-autopiloting').innerHTML = response.isAutopiloting ? 'on' : 'off';
 				document.getElementById('vision-latency').innerHTML = response.latency;
+				if (response.objects.length)
+					document.getElementById('most-probable').innerHTML = response.objects[0].probability;
 			}
 		});
 	}
