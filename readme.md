@@ -4,8 +4,7 @@ https://www.raspberrypi.org/forums/viewtopic.php?t=197513
 
 ```
 sudo apt install libatlas-base-dev
-pip3 install tensorflow
-pip3 install bottle
+sudo pip3 install tensorflow bottle picamera gpiozero
 apt-get install python3-bottle nginx
 
 mkdir ~/Documents/Work
