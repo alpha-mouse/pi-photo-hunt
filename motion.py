@@ -8,11 +8,11 @@ speed_scale = 0.9
 direction_offset = 0
 direction_scale = 1.4
 
-""" value from -1 to 1 translated into 1000000 to 2000000 range """
+""" value from -1 to 1 translated into 1_000_000 to 2_000_000 range """
 def _translate_duty_cycle(value, offset = 0, scale = 1):
     offsetted_and_scaled = ((1 + value*scale + offset) / 2)
     bounded = max(0, min (offsetted_and_scaled, 1))
-    return int(1000000 + bounded * 1000000)
+    return int(1_000_000 + bounded * 1_000_000)
 
 class Motion:
     _enabledPin = 6
@@ -31,8 +31,8 @@ class Motion:
 
         time.sleep(1) # wait till pwms are exported
 
-        self._speedPwm.period = 50000000
-        self._directionPwm.period = 50000000
+        self._speedPwm.period = 20_000_000
+        self._directionPwm.period = 20_000_000
 
     def enable(self):
         self._updatePwm()
