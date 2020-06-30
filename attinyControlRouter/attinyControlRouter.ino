@@ -15,7 +15,6 @@ bool initiated = false;
 unsigned long pulseStart = 0;
 unsigned long pulseEnd = 0;
 
-int previousAutopilotRequest = 0;
 unsigned long autopilotStart = 0;
 bool onAutopilot = false;
 
@@ -37,7 +36,7 @@ ISR(INT0_vect)
             sum += counts[i];
           }
           float currentMotorDutyCycle = sum / resolution;
-          rcOverride = RC_LOW_THRESHOLD < currentMotorDutyCycle && currentMotorDutyCycle < RC_HIGH_THRESHOLD;
+          rcOverride = currentMotorDutyCycle < RC_LOW_THRESHOLD || RC_HIGH_THRESHOLD < currentMotorDutyCycle;
         }
       }
       pulseStart = m;
@@ -73,15 +72,11 @@ void setup() {
 
 void loop() {
   bool switchToAutopilot;
-  if (rcOverride || (onAutopilot && (millis() - autopilotStart > AUTOPILOTING_DURATION_THRESHOLD))) {
+  if (rcOverride || (onAutopilot && (AUTOPILOTING_DURATION_THRESHOLD < millis() - autopilotStart))) {
     switchToAutopilot = false;
   } else {
     // if PB3 is high, which is if autopilot control is requested
-    int currentAutopilotRequest = IS_SET(PINB, PINB3);
-    if (previousAutopilotRequest ^ currentAutopilotRequest) {
-      previousAutopilotRequest = currentAutopilotRequest;
-      switchToAutopilot = currentAutopilotRequest;
-    }
+    switchToAutopilot = IS_SET(PINB, PINB3);
   }
   if (switchToAutopilot) {
     if (!onAutopilot) {
